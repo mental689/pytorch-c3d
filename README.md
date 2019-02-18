@@ -4,9 +4,15 @@ C3D by PyTorch
 ## Introduction
 We reproduce the results of C3D [1] in UCF101 [2] and test the performance in DogCentric Activity dataset [3].
 
-## Preparation
+## Requirements
 
-### Dataset
+To install requirements, please have Python 3 in your environment, then run
+
+```bash
+$ pip install -r requirements.txt
+```
+
+## Dataset
 
 * To download UCF101 please visit [http://crcv.ucf.edu/data/UCF101.php](http://crcv.ucf.edu/data/UCF101.php) to download a rar archive.
 Please extract the archive and modify the [train](https://github.com/chuckcho/video-caffe/blob/master/examples/c3d_ucf101/c3d_ucf101_train_split1.txt) and [test](https://github.com/chuckcho/video-caffe/blob/master/examples/c3d_ucf101/c3d_ucf101_test_split1.txt) lists of `video-caffe` to match the video paths.
@@ -17,6 +23,25 @@ Please extract the archive and modify the [train](https://github.com/chuckcho/vi
 $ cd static/videos
 $ bash download_dogcentric.sh
 ```
+
+# Results
+### Results in UCF101
+
+* Pre-processing of clips is done similar to what in `video-caffe` and in [1].
+Details can be found in `UCF101ClipTrainer` class.
+
+* Training on split1 of UCF101 dataset took 10 hours for 10 epochs. Learning curve looks similar to that of `video-caffe` implementation:
+
+![UCF101 Learning curve](./static/train_loss.png)
+
+* Testing is done at about 50 clips per second (each clip has 16 frames like in [1]).
+In split1, we obtained 44.72% top-1 clip accuracy, which is close to what described in `video-caffe`.
+[1] described that the original C3D achieved around 47% accuracy (compared to the best architecture in [1, Figure 3], we disabled `conv3b, conv4b, conv5b` for faster inference).
+Automatic search for neural architectures for 3D data is interesting, some recent researches did it (such as [iTGM](https://arxiv.org/pdf/1811.10636.pdf)).
+
+* Training and testing details can be traced from `train_ucf101.py` and `test_ucf101.py` files.
+
+### Results in DogCentric Activity dataset
 
 ## References
 
