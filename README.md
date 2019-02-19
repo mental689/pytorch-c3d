@@ -41,6 +41,8 @@ Automatic search for neural architectures for 3D data is interesting, some recen
 
 * Training and testing details can be traced from `train_ucf101.py` and `test_ucf101.py` files.
 
+* Pretrained models of first 10 epochs can be downloaded from [Dropbox](https://www.dropbox.com/sh/mzr9fazsfkfjpyx/AAAUU2R31galLpRrK97QOjBEa?dl=0).
+
 ### Results in DogCentric Activity dataset
 
 ## References
