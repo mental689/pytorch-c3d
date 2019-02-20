@@ -47,6 +47,8 @@ Automatic search for neural architectures for 3D data is interesting, some recen
 
 * Extracted C3D features can be obtained from [`static/features/`](./static/features).
 
+* Added a [BoVW+SVM example](./dogcentric.ipynb) with C3D features.
+
 
 ## What to do next?
 
