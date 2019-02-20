@@ -45,10 +45,19 @@ Automatic search for neural architectures for 3D data is interesting, some recen
 
 ### Results in DogCentric Activity dataset
 
+* Extracted C3D features can be obtained from [`static/features/`](./static/features).
+
+
+## What to do next?
+
+* Maybe Dogs' representation learning with [DECADE dataset](https://github.com/ehsanik/dogTorch) [4]?
+
 ## References
 
-[1] D. Tran, L. Bourdev, R. Fergus, L. Torresani, and M. Paluri, "Learning Spatiotemporal Features with 3D Convolutional Networks", ICCV 2015.
+[1] D. Tran, L. Bourdev, R. Fergus, L. Torresani, and M. Paluri, "**Learning Spatiotemporal Features with 3D Convolutional Networks**", ICCV 2015.
 
-[2] K. Soomro, A.-R. Zamir and M. Shah, "UCF101: A Dataset of 101 Human Action Classes From Videos in The Wild", CRCV-TR-12-01, November, 2012. 
+[2] K. Soomro, A.-R. Zamir and M. Shah, "**UCF101: A Dataset of 101 Human Action Classes From Videos in The Wild**", CRCV-TR-12-01, November, 2012. 
 
-[3] Y. Iwashita, A. Takamine, R. Kurazume, and M. S. Ryoo, "First-Person Animal Activity Recognition from Egocentric Videos", ICPR 2014. 
+[3] Y. Iwashita, A. Takamine, R. Kurazume, and M. S. Ryoo, "**First-Person Animal Activity Recognition from Egocentric Videos**", ICPR 2014. 
+
+[4] Kiana Ehsani, Hessam Bagherinezhad, Joseph Redmon, Roozbeh Mottaghi, and Ali Farhadi, "**Who Let The Dogs Out? Modeling Dog Behavior From Visual Data**", CVPR 2018.

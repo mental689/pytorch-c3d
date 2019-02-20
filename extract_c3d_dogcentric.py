@@ -19,17 +19,17 @@ def load(video_path, transforms=None):
         return None, None
     results = []
     num_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-    chunk = np.zeros(shape=(16, 171, 128, 3))
     for i in range(num_frames//16+1):
+        chunk = np.zeros(shape=(16, 128, 171, 3))
         for j in range(min(16, num_frames-16*i)):
             ret, frame = cap.read()
             if not ret or frame is None:
                 break
             frame = cv2.resize(frame, dsize=(171, 128))
-            chunk[i] = frame
-            if transforms is not None:
-                chunk = transforms(chunk)
-            results.append(chunk)
+            chunk[j] = frame
+        if transforms is not None:
+            chunk = transforms(chunk)
+        results.append(chunk)
     cap.release()
     return results
 
@@ -44,18 +44,21 @@ def load_model(model_path):
         model.eval()
     except Exception as e:
         logger.error(e)
+        print('Cannot load model {}'.format(model_path))
+    print('Loaded model {}'.format(model_path))
     return model
 
 
 def extract(video_path, model, layer='fc6'):
     trans = transforms.Compose([
         SubtractMean(),
-        CenterCrop()
+        CenterCrop(size=112)
     ])
     segments = load(video_path, trans)
     features = []
     for segment in tqdm(segments):
-        features.append(model.extract(torch.from_numpy(segment), layer=layer).float())
+        input = torch.from_numpy(segment.transpose([3,0,1,2])[np.newaxis,...].astype('float32')).to('cuda')
+        features.append(model.module.extract(input.detach(), layer=layer).detach().float())
     return features
 
 
@@ -82,5 +85,5 @@ if __name__ == '__main__':
     for video in videos:
         logger.info(video)
         features = extract(video_path=video, model=model, layer=args.layer)
-        pickle.dump(features, open('{}_features.pkl'.format(video), 'wb'))
+        pickle.dump(features, open('{}/{}_features.pkl'.format(args.save_dir, video.split('/')[-1]), 'wb'))
 
