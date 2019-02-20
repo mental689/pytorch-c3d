@@ -4,3 +4,4 @@ torchvision==0.2.1
 tensorboardX
 opencv-contrib-python>=4.0.0
 tqdm>=3.0
+scikit-learn==0.20.2
